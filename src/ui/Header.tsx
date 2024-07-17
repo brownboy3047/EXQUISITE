@@ -7,8 +7,11 @@ import heart from "../assets/heart.svg";
 import search from "../assets/search-normal.svg";
 import rectangle from "../assets/Rectangle 1.svg";
 import bag from "../assets/shopping-bag.svg";
+import { useCartContext } from "../hooks/useCartContext";
 
 const Header = () => {
+  const { selectedItems, selectedFavorite } = useCartContext();
+
   return (
     <header className="py-6 px-3 lg:px-16 flex items-center justify-between">
       <div className="">
@@ -23,14 +26,20 @@ const Header = () => {
           SHOP
         </NavLink>
         <NavLink to="/cart" className="head text-xs md:text-base">
-          CART
+          <span>CART</span>
+          <sup className="font-bold">{selectedItems.length}</sup>
         </NavLink>
       </nav>
 
       <div className="hidden lg:flex items-center gap-5">
         <div className="flex items-center gap-2">
           <img src={user} alt="user" />
-          <img src={heart} alt="heart" />
+          <p className="relative">
+            <img src={heart} alt="heart" />
+            <sup className="absolute -right-1 top-[2px] font-bold text-red-600">
+              {selectedFavorite.length}
+            </sup>
+          </p>
         </div>
 
         <div className="bg-black flex items-center gap-10 py-2 px-4 rounded-lg">
