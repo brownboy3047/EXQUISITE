@@ -8,7 +8,7 @@ import { useCartContext } from "../hooks/useCartContext";
 const type = [
   { id: 1, label: "all" },
   { id: 2, label: "blazer" },
-  { id: 3, label: "double breasted" },
+  { id: 3, label: "double breasted", name: "Afolabi Mabunmi" },
   { id: 4, label: "peak lapel" },
   { id: 5, label: "ventless" },
   { id: 6, label: "shawl laperl" },

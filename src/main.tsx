@@ -4,6 +4,8 @@ import App from "./App.tsx";
 import "./index.css";
 import { CartContextProvider } from "./context/CartContext.tsx";
 
+// Afolabi Mabunmi code snippet
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <CartContextProvider>

@@ -85,4 +85,10 @@ export const collections = [
     photo: suit3,
     price: 343238.16,
   },
+  {
+    id: 13,
+    collections: "brownboy afolabi",
+    photo: suit4,
+    price: 345000.0,
+  },
 ];
