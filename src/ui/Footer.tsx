@@ -4,8 +4,11 @@ import heart from "../assets/black-heart.svg";
 import search from "../assets/black-search.svg";
 import blackBag from "../assets/black-bag.svg";
 import blackRec from "../assets/black-Rectangle.svg";
+import { useCartContext } from "../hooks/useCartContext";
 
 const Footer = () => {
+  const { selectedFavorite } = useCartContext();
+
   return (
     <footer
       className="lg:hidden flex items-center gap-5 bg-black bg-opacity-25 rounded-[30px] p-5 w-[292px] 
@@ -13,7 +16,13 @@ const Footer = () => {
     >
       <div className="flex items-center gap-2">
         <img src={user} alt="user" />
-        <img src={heart} alt="heart" />
+
+        <p className="relative">
+          <img src={heart} alt="heart" />
+          <sup className="absolute -right-2 top-[2px] font-semibold text-black">
+            {selectedFavorite.length}
+          </sup>
+        </p>
       </div>
 
       <div className="bg-white flex items-center gap-10 py-1 px-5 rounded-lg">

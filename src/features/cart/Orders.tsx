@@ -1,14 +1,13 @@
 import React from "react";
-import { useCartContext } from "../../hooks/useCartContext";
 import { useNavigate } from "react-router-dom";
 import CheckoutCard from "../../ui/CheckoutCard";
+import OrderView from "./OrderView";
 
 const Orders: React.FC = () => {
-  const { selectedItems, setSelectedItems } = useCartContext();
   const navigate = useNavigate();
 
-  const handleDelete = (id: number) => {
-    setSelectedItems(selectedItems.filter((order) => order.id !== id));
+  const handleSubmit = () => {
+    navigate("/checkout");
   };
 
   return (
@@ -16,67 +15,16 @@ const Orders: React.FC = () => {
       <div>
         <p className="mb-4 text-2xl">Orders</p>
 
-        <ul className="w-full lg:w-[730px] rounded-2xl border">
-          {selectedItems.length > 0 ? (
-            selectedItems.map((item) => (
-              <li
-                key={item.id}
-                className="flex flex-col sm:flex-row gap-5 border-b p-3 lg:p-5"
-              >
-                <img src={item.photo} alt="suit" />
-
-                <div>
-                  <h3 className="text-xs lg:text-lg font-medium mb-3">
-                    {item.collections}
-                  </h3>
-
-                  <p className="text-base lg:text-2xl font-semibold">
-                    #{item.price}
-                  </p>
-
-                  <div className="flex items-center gap-4 my-2">
-                    {/* <img src={minus} alt="minus" className="border" /> */}
-                    <p className="border border-black p-2 rounded-full cursor-pointer font-bold">
-                      -
-                    </p>
-                    <p className="bg-black bg-opacity-10 p-2 rounded-full font-bold">
-                      1
-                    </p>
-                    <p className="border border-black bg-black text-white p-2 rounded-full cursor-pointer font-bold">
-                      +
-                    </p>
-                  </div>
-
-                  <button
-                    className="w-[116px] py-2 px-4 rounded-lg bg-black bg-opacity-10 mt-4"
-                    onClick={() => handleDelete(item.id)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </li>
-            ))
-          ) : (
-            <div className="text-center mt-5 border-b p-10">
-              <p>
-                Cart is Empty. click{" "}
-                <span
-                  className="font-medium cursor-pointer"
-                  onClick={() => navigate("/shop")}
-                >
-                  Here
-                </span>{" "}
-                to shop
-              </p>
-            </div>
-          )}
-        </ul>
+        <OrderView />
       </div>
 
       <div>
         <p className="mb-4 text-2xl">Orders Summary</p>
 
-        <CheckoutCard />
+        <CheckoutCard
+          buttonName="Proceed to checkout"
+          onSubmit={handleSubmit}
+        />
       </div>
     </div>
   );

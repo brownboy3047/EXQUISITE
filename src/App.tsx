@@ -6,6 +6,7 @@ import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import Orders from "./features/cart/Orders";
 import Checkout from "./features/cart/Checkout";
+import OrderComplete from "./features/cart/OrderComplete";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route index element={<Navigate replace to="cart" />} />
           <Route path="cart" element={<Orders />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="success" element={<OrderComplete />} />
         </Route>
       </Routes>
       <Footer />
