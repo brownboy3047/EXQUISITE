@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="home" element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route element={<Cart />}>
           <Route index element={<Navigate replace to="cart" />} />
