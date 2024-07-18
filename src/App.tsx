@@ -13,10 +13,12 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="home" element={<Home />} />
+        <Route path="/" element={<Home />} />
+
         <Route path="shop" element={<Shop />} />
+
         <Route element={<Cart />}>
-          <Route index element={<Navigate replace to="cart" />} />
+          <Route element={<Navigate replace to="cart" />} />
           <Route path="cart" element={<Orders />} />
           <Route path="checkout" element={<Checkout />} />
           <Route path="success" element={<OrderComplete />} />

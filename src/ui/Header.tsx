@@ -19,7 +19,7 @@ const Header = () => {
       </div>
 
       <nav className="flex items-center gap-8">
-        <NavLink to="/home" className="head text-xs md:text-base">
+        <NavLink to="/" className="head text-xs md:text-base">
           HOME
         </NavLink>
         <NavLink to="/shop" className="head text-xs md:text-base">
