@@ -21,7 +21,7 @@ const Shop: React.FC = () => {
 
   //   const [selectedItems, setSelectedItems] = useState<CollectionType[]>([]);
   const {
-    selectedItems,
+    selectedItems: cart,
     setSelectedItems,
     selectedFavorite,
     setSelectedFavorite,
@@ -44,7 +44,18 @@ const Shop: React.FC = () => {
   };
 
   const handleSelectItem = (selected: CollectionType) => {
-    setSelectedItems([...selectedItems, selected]);
+    setSelectedItems([...cart, selected]);
+
+    localStorage.setItem("cart", JSON.stringify([...cart, selected]));
+  };
+
+  const handleRemoveItem = (selected: CollectionType) => {
+    setSelectedItems(cart.filter((prod) => prod.id !== selected.id));
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart.filter((prod) => prod.id !== selected.id))
+    );
   };
 
   const handleAddFavorite = (selected: CollectionType) => {
@@ -95,16 +106,25 @@ const Shop: React.FC = () => {
                   </div>
 
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center justify-between mt-2">
-                    <button
-                      className="py-[5px] px-[8px] rounded-lg bg-black text-white text-[10px] sm:text-sm"
-                      onClick={() => handleSelectItem(collection)}
-                    >
-                      Add to cart
-                    </button>
+                    {cart.some((product) => product.id === collection.id) ? (
+                      <button
+                        className="py-[7px] px-[4px] rounded-lg bg-red-600 text-white text-[8px] sm:text-[9px] outline-none"
+                        onClick={() => handleRemoveItem(collection)}
+                      >
+                        Remove from cart
+                      </button>
+                    ) : (
+                      <button
+                        className="py-[5px] px-[8px] rounded-lg bg-black text-white text-[10px] sm:text-sm outline-none"
+                        onClick={() => handleSelectItem(collection)}
+                      >
+                        Add to cart
+                      </button>
+                    )}
 
                     <button
                       className="py-[5px] px-[8px] rounded-lg bg-black bg-opacity-10 text-black 
-                  text-[10px] sm:text-sm flex items-center justify-center gap-[6px]"
+                  text-[10px] sm:text-sm flex items-center justify-center gap-[6px] outline-none"
                       onClick={() => handleAddFavorite(collection)}
                     >
                       <span className="">Add to Favorite</span>

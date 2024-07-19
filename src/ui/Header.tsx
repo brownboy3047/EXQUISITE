@@ -33,8 +33,8 @@ const Header = () => {
 
       <div className="hidden lg:flex items-center gap-5">
         <div className="flex items-center gap-2">
-          <img src={user} alt="user" />
-          <p className="relative">
+          <img src={user} alt="user" className="cursor-pointer" />
+          <p className="relative cursor-pointer">
             <img src={heart} alt="heart" />
             <sup className="absolute -right-1 top-[2px] font-bold text-red-600">
               {selectedFavorite.length}

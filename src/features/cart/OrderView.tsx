@@ -3,17 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useCartContext } from "../../hooks/useCartContext";
 
 const OrderView: React.FC = () => {
-  const { selectedItems, setSelectedItems } = useCartContext();
+  const { selectedItems: cart, setSelectedItems } = useCartContext();
   const navigate = useNavigate();
 
   const handleDelete = (id: number) => {
-    setSelectedItems(selectedItems.filter((order) => order.id !== id));
+    setSelectedItems(cart.filter((order) => order.id !== id));
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(cart.filter((prod) => prod.id !== id))
+    );
   };
 
   return (
     <ul className="w-full lg:w-[730px] rounded-2xl border">
-      {selectedItems.length > 0 ? (
-        selectedItems.map((item) => (
+      {cart.length > 0 ? (
+        cart.map((item) => (
           <li
             key={item.id}
             className="flex flex-col sm:flex-row gap-5 border-b p-3 lg:p-5"

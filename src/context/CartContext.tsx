@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { CollectionType } from "../data/collectionData";
 
 export interface ContextProps {
@@ -19,6 +19,14 @@ export const CartContextProvider = ({
   const [selectedFavorite, setSelectedFavorite] = useState<CollectionType[]>(
     []
   );
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem("cart");
+
+    if (storedItems) {
+      setSelectedItems(JSON.parse(storedItems));
+    }
+  }, []);
 
   return (
     <CartContext.Provider
