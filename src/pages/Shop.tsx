@@ -101,7 +101,7 @@ const Shop: React.FC = () => {
                       {collection.collections}
                     </p>
                     <p className="text-sm md:text-lg font-semibold">
-                      #{collection.price}
+                      #{collection.price.toLocaleString()}
                     </p>
                   </div>
 

@@ -18,7 +18,7 @@ const CheckoutCard: React.FC<CheckoutCardProps> = ({
 
   const subTotal = selectedItems.reduce((acc, item) => acc + item.price, 0);
   const discount = Number((subTotal * 0.1).toFixed(2));
-  const total = (subTotal + discount + 20000).toFixed(2);
+  const total = Number((subTotal + discount + 20000).toFixed(2));
 
   return (
     <div className="w-full sm:w-[380px] py-4 px-6 rounded-lg border">
@@ -32,13 +32,13 @@ const CheckoutCard: React.FC<CheckoutCardProps> = ({
       <div className="flex items-center justify-between w-full sm:w-[299px] mt-3">
         <p>Sub Total</p>
         {/* <p>#1,330,000.00</p> */}
-        <p>#{subTotal}</p>
+        <p>#{subTotal.toLocaleString()}</p>
       </div>
 
       <div className="flex items-center justify-between w-full sm:w-[299px] mt-3">
         <p>Discount</p>
         {/* <p>#50,000.00</p> */}
-        <p>#{discount}</p>
+        <p>#{discount.toLocaleString()}</p>
       </div>
 
       <div className="flex items-center justify-between w-full sm:w-[299px] mt-3 border-b pb-3">
@@ -49,7 +49,7 @@ const CheckoutCard: React.FC<CheckoutCardProps> = ({
       <div className="flex items-center justify-between w-full sm:w-[299px] mt-2 font-semibold text-sm sm:text-2xl">
         <p>Total</p>
         {/* <p>#1,400,00.00</p> */}
-        <p>#{total}</p>
+        <p>#{total.toLocaleString()}</p>
       </div>
 
       {/* <button
