@@ -22,11 +22,24 @@ export const CartContextProvider = ({
 
   useEffect(() => {
     const storedItems = localStorage.getItem("cart");
+    const storedFavorite = localStorage.getItem("favorite");
 
     if (storedItems) {
       setSelectedItems(JSON.parse(storedItems));
     }
+
+    if (storedFavorite) {
+      setSelectedFavorite(JSON.parse(storedFavorite));
+    }
   }, []);
+
+  // useEffect(() => {
+  //   const storedFavorite = localStorage.getItem("favorite");
+
+  //   if (storedFavorite) {
+  //     setSelectedFavorite(JSON.parse(storedFavorite));
+  //   }
+  // }, []);
 
   return (
     <CartContext.Provider

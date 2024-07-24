@@ -23,7 +23,7 @@ const Shop: React.FC = () => {
   const {
     selectedItems: cart,
     setSelectedItems,
-    selectedFavorite,
+    selectedFavorite: favorite,
     setSelectedFavorite,
   } = useCartContext();
 
@@ -59,7 +59,18 @@ const Shop: React.FC = () => {
   };
 
   const handleAddFavorite = (selected: CollectionType) => {
-    setSelectedFavorite([...selectedFavorite, selected]);
+    setSelectedFavorite([...favorite, selected]);
+
+    localStorage.setItem("favorite", JSON.stringify([...favorite, selected]));
+  };
+
+  const handleAddRemoveFavorite = (selected: CollectionType) => {
+    setSelectedFavorite(favorite.filter((fav) => fav.id !== selected.id));
+
+    localStorage.setItem(
+      "favorite",
+      JSON.stringify(favorite.filter((fav) => fav.id !== selected.id))
+    );
   };
 
   return (
@@ -108,7 +119,7 @@ const Shop: React.FC = () => {
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-center justify-between mt-2">
                     {cart.some((product) => product.id === collection.id) ? (
                       <button
-                        className="py-[7px] px-[4px] rounded-lg bg-red-600 text-white text-[8px] sm:text-[9px] outline-none"
+                        className="py-[7px] px-[6px] rounded-lg bg-red-600 text-white text-[8px] sm:text-[10px] outline-none"
                         onClick={() => handleRemoveItem(collection)}
                       >
                         Remove from cart
@@ -122,14 +133,26 @@ const Shop: React.FC = () => {
                       </button>
                     )}
 
-                    <button
-                      className="py-[5px] px-[8px] rounded-lg bg-black bg-opacity-10 text-black 
+                    {/* button to add and remove favorite */}
+                    {favorite.some((fav) => fav.id === collection.id) ? (
+                      <button
+                        className="py-[5px] px-[8px] rounded-lg bg-black bg-opacity-10 text-red-600 
                   text-[10px] sm:text-sm flex items-center justify-center gap-[6px] outline-none"
-                      onClick={() => handleAddFavorite(collection)}
-                    >
-                      <span className="">Add to Favorite</span>
-                      <img src={heart} alt="heart" />
-                    </button>
+                        onClick={() => handleAddRemoveFavorite(collection)}
+                      >
+                        <span className="">Remove Favorite</span>
+                        {/* <img src={heart} alt="heart" /> */}
+                      </button>
+                    ) : (
+                      <button
+                        className="py-[5px] px-[8px] rounded-lg bg-black bg-opacity-10 text-black 
+                text-[10px] sm:text-sm flex items-center justify-center gap-[6px] outline-none"
+                        onClick={() => handleAddFavorite(collection)}
+                      >
+                        <span className="">Add to Favorite</span>
+                        <img src={heart} alt="heart" />
+                      </button>
+                    )}
                   </div>
                 </div>
               </li>
